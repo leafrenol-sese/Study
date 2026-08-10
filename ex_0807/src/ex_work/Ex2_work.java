@@ -25,7 +25,8 @@ public class Ex2_work {
       System.out.println("2 ~ 9 사이의 값을 넣으세요");
     }else{
       for(int i = 1; i <= 9; i++){
-        System.out.println( dan + " * " + i + " = " + ( dan*i ));
+      //  System.out.println( dan + " * " + i + " = " + ( dan*i ));
+      System.out.printf(" %d * %d = %02d\n" , dan, i, (dan*i));  
         
       }//for
     }//if

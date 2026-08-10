@@ -27,10 +27,16 @@ public class Ex1_work {
         int year = sc.nextInt();
   
             if((year % 4 == 0 && year % 100 != 0)||(year % 100 == 0 || year % 400 == 0)){
-            System.out.println(year + "는(/은) 윤년입니다!");
+            System.out.println(year + "는(/은) 윤년입니다!"); 
 
             }else{
             System.out.println(year + "는(/은) 평년입니다!");}   
 
+
+            //boolean res = year % 4 == 0 && year % 100 != 0)||(year % 100 == 0 || year % 400 == 0;
+            //if ( res ){'res == true'의 의미
+            // System.out.println(year + "는(/은) 윤년입니다!"); 
+            //}else{
+            // System.out.println(year + "는(/은) 평년입니다!");}  이렇게도 했습니다
     }//main
 }//class end
