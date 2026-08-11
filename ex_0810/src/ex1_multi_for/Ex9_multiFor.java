@@ -13,26 +13,20 @@ public class Ex9_multiFor {
         */
 
 
-        for(int i = 1; i <= 5; i++ ){
+        for(int i = 0; i < 5; i++ ){
         
-            for (int j = 1; j <= 9; j++){
-                
-                int k = 1;
-                if( k % 2 == 1 && k + 1 < i){
-                    System.out.print( " * " );
-                }else{
-                    System.out.println("   ");
-                }
-
+            for (int j = 0; j < 5 + i; j++){
+                if( i + j >3) //필요 없는 부분과 출력해야하는 부분을 구분함
+                 System.out.print("* ");
+                else
+                 System.out.print("  ");
                         
             }//inner
 
             System.out.println();
 
         }// outer
-
-
-
+            
 }// main
 
 }// class end
