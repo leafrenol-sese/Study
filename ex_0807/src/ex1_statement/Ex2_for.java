@@ -10,7 +10,7 @@ public class Ex2_for {
     int sum = 0;
     for( int i = 1; i <= 10; i ++){
         if( i % 2 == 1 ){
-            sum += i;
+            sum += i; // 1, 3, 5, 7, 9 일때만 i값이 변경 -> 변경된 숫자들의 덧셈으로 연산됨
             }//if
         }//for
     

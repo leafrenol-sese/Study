@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Ex4_work {
     public static void main(String[] args) {
         
-    //1부터 ㅋ보드에서 받은 값(n)까지의 합을 출력
+    //1부터 키보드에서 받은 값(n)까지의 합을 출력
     //------------------
     //입력 : 5
     //결과 : 15

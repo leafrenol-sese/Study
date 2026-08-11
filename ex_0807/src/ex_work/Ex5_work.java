@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Ex5_work {
     public static void main(String[] args) {
         
-    //정수 n1, n2f를 입력받고
+    //정수 n1, n2를 입력받고
     //n1~n2사이의 합을 출력
     //--------------------
     //수1 : 2

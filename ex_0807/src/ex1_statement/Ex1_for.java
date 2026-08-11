@@ -17,7 +17,7 @@ public class Ex1_for {
         } // for
         System.out.println("----------------------");
 
-        // 10~`까지 반복하는 for문
+        // 10~까지 반복하는 for문
 
         for (int i = 10; i >= 1; i--) { // 위에도 i를 사용했지만 지역변수이기 때문에 다시 이용할 수 있다
 
