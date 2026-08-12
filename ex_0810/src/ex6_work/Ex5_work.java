@@ -13,20 +13,37 @@ public class Ex5_work {
 
         Scanner sc = new Scanner(System.in);
         System.out.print("수1 : ");
-        int su1 = sc.nextInt();
+        int bigNum = sc.nextInt();
+
         System.out.print("수2 : ");
-        int su2 = sc.nextInt();
-    
-        for(){
-    
-            for(){
-    
-            }//inner
-    
-        }//outer
-    
+        int smallNum = sc.nextInt();
+        
+        for(int i =1 ; i <= bigNum*smallNum; i++){
 
+            if( i % smallNum == 0 && i % bigNum == 0 ){
+            System.out.println("최소공배수 : " + i );
+            break;
+            }//if
+            
+        }//for
 
+    System.out.println("-----------------------");
+
+        //유클리드 호제법으로 최소 공배수 구하기
+        int x = bigNum;
+        int y = smallNum;
+
+        while (y !=0) {
+            int tmp = x % y;
+            x = y;
+            y = tmp;
+        }//while
+        int gcd = x; //x에 저장되었던 최대공약수 값을 gcd로
+        //최소공배수
+        int lcm = (bigNum*smallNum) / gcd;
+        
+        System.out.println( "최대공약수 : " + lcm );
+
+        
     }//main
-
 }//class end

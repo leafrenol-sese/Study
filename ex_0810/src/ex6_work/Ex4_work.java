@@ -12,30 +12,36 @@ public static void main(String[] args) {
     //최대공약수 : 6
     
     Scanner sc = new Scanner(System.in);
-    System.out.print("수1 : ");
-    int su1 = sc.nextInt();
-    System.out.print("수2 : ");
-    int su2 = sc.nextInt();
+        System.out.print("수1 : ");
+        int bigNum = sc.nextInt();
 
-    int m = 0;
-    int n = 0;
+        System.out.print("수2 : ");
+        int smallNum = sc.nextInt();
    
-    for(int i = 1; i < su1; i++){
+        if( bigNum < smallNum ){
+            int i = bigNum;
+            bigNum = smallNum;
+            smallNum = i;
+        }//if
+        
+        int i = smallNum;
+
+        for(; i >= 1; i--){
+        if(smallNum % i == 0 && bigNum % i == 0 )
+            break;
+        }//for
+    System.out.println("최대공약수 : " + i );
+
+    System.out.println("-----------------------");
+
+        //유클리드 호제법으로 최대공약수 구하기
+        while (smallNum !=0) {
             
-        for(int j = 1; j <su2; j++){
-            if(j % i != 0){
-                j = n;
-            }else(i % j != 0){
-                i = m;
-            }//if
-        }//inner
-
-        System.out.print("최대공약수 : " + (m*n) );
-
-    }//outer
-
-    
-
+            int tmp = bigNum % smallNum;
+            bigNum = smallNum;
+            smallNum = tmp;
+        }//while
+        System.out.println( "최대공약수 : " + bigNum );
 
     }//main
 }//class end
