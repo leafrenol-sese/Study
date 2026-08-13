@@ -8,7 +8,8 @@ public class Ex02_work {
         //결과 121
 
         int[] arr = { 10, 11, 37, 61, 2 };
-        int res = 0;
+        
+        int res = 0;//합을 일시적으로 저장할 공간
 
         for( int i = 0; i < arr.length; i++ ){
             res += arr[i]; 

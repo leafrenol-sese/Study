@@ -26,15 +26,15 @@ public class Ex05_work {
         int sum = 0; //총점을 저장할 변수
        
             for( int i = 0; i < studentOfNember; i++ ){
-                System.out.printf("학생%d의 성적 : " , i+1 ); //i는 현재 0이니 +1 필요
-                grade [i] = sc.nextInt();
+                System.out.printf("학생%d의 성적 : " , i+1 ); //i는 현재 0이니 +1 필요=>입력할때마다 학생1->학생2->학생3 으로 변화
+                grade [i] = sc.nextInt(); //학생의 성적을 입력
                 sum += grade[i]; //i가 증감할 때마다 출력값을 더한다 명령 
-                // for2문 전에는 이미 총합이 계산되어있음
+                // for2문 전에는 for1안에서 총합이 계산되어있음
             }//for1
 
         System.out.println("--------------");
 
-        float average = (float)sum / studentOfNember;
+        float average = (float)sum / studentOfNember; //위의 for문에서 sum += grade[i]이 되어서 저장되어 for문 밖에 저장되어 있음
         System.out.printf("평균 성적 : %.2f\n" , average); //\n = 줄바꿈 , printf이기 때문에 문장 끝에 입력함
 
         System.out.println("----평균 이상인 학생들----");

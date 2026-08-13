@@ -16,7 +16,8 @@ public class Ex01_work {
         
         for( int i = 0; i < n; i++ ){ // n = arr.length 와도 같다
             
-            arr[i] = (char)('A'+i);
+            arr[i] = (char)('A'+i); 
+            //아스킥코드에서 A=65, i++ : i가 증가할수록 뒤의 i도 같이 증가 되므로 65, 66, 67, 68, 69 로 출력된다 
           System.out.print( arr[i] );
      
         }//for
