@@ -1,0 +1,29 @@
+package poke;
+
+import java.util.Random;
+
+public class Pokemain {
+    public static void main(String[] args) {
+        
+        
+        String[] sname = {"피카츄" , "파이리"};
+        int [] nhp = {100, 80};
+        String[] stype = {"전기" , "불"};
+
+
+        Pokemon p1 = new Pokemon();
+        p1.name = sname[new Random().nextInt(2)]; //랜덤값이 1이면 피카츄, 2면 파이리
+        p1.hp = nhp [new Random().nextInt(2)];
+        p1.type = stype [new Random().nextInt(2)]; 
+        p1.info();
+
+        Pokemon p2 = new Pokemon();
+        p2.name = sname[new Random().nextInt(2)]; //랜덤값이 1이면 피카츄, 2면 파이리
+        p2.hp = nhp [new Random().nextInt(2)];
+        p2.type = stype [new Random().nextInt(2)]; 
+        p2.info();
+
+
+
+    }//main
+}
