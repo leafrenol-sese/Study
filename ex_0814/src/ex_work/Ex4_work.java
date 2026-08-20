@@ -25,14 +25,14 @@ public class Ex4_work {
         // <for문 종료> => syso(결과 : sum(1+2+1)=4)
 
         int cnt = 0; // o가 나온 수
-        int sum = 0; // cnt 총 합
+        int sum = 0; // cnt 총 합 
 
         for (int i = 0; i < qu.length(); i++) {
 
             if (qu.charAt(i) == 'o') {
                 cnt++;
             } else {
-                cnt = 0;
+                cnt = 0;//'x'가 나오는 경우, cnt를 0으로 만들어서 리셋시킨다 
             }
             sum += cnt;
 

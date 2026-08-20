@@ -11,10 +11,10 @@ public class Ex3_string {
             System.out.println("주민번호가 잘못됐어요");
 
         }else{
-            String year = id.substring(0,2); //
-            String month = id.substring(2,4); //
-            String day = id.substring(4,6); //
-            char gender = id.charAt(7); //
+            String year = id.substring(0,2); //92
+            String month = id.substring(2,4); //04
+            String day = id.substring(4,6); //11
+            char gender = id.charAt(7); //2
 
             System.out.printf("당신은 %s년 %s월 %s일에 태어난 " , year , month, day);
 

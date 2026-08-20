@@ -27,7 +27,7 @@ public class Ex7_work {
 
         for(; i < str.length(); i++ ){
             
-            char ch = str.charAt(i);
+            char ch = str.charAt(i); //입력한 문자열 str의 인덱스 i번째 글자를 ch에 저장
             
             if( ch < '0' || ch > '9' ) // 아스키코드 사용
                 break;

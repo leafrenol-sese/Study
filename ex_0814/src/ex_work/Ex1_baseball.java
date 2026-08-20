@@ -81,7 +81,7 @@ public class Ex1_baseball {
             if (strike == 3) { // for문 밖의 카운트된 strike 수가 3개일 때
                 System.out.println("정답 !! - " + com[0] + com[1] + com[2]);
                 System.out.println(cnt + "회 클리어!"); //for문이 반복된 만큼 cnt가 늘어났음
-                break; // while문 종료
+                break; // 정답이면 while문 종료
 
             } else {
                 if (strike > 0 || ball > 0) { // strike 또는 ball의 수가 0보다 클 때
