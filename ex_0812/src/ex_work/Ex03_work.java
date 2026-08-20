@@ -9,7 +9,7 @@ public class Ex03_work {
 
         int[] arr = {4, 13, 7, 19, 1, 15};
 
-        int max = arr[0];
+        int max = arr[0]; //= [4], 시작부터 index 0의 값으로 max를 지정했기 때문에 아래의 for문 'int i = 0'이 아닌 'int i = 1'로 시작 
 
         for(int i = 1; i < arr.length; i++){ //arr.length = 6 (배열의 갯수)
             

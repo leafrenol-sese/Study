@@ -30,8 +30,8 @@ public class Ex06_work {
             arr[i] = sc.nextInt();
         } // for1
 
-        int count = 0;
-        int max = 0; // 가장 큰 수를 저장하는 곳
+        int count = 0;// 몇번 등장했는지 잠깐 저장되는 곳
+        int max = 0; // 가장 많이 등장한 정수를 저장하는 곳
 
         for (int i = 0; i < arr.length; i++) {
 
@@ -40,13 +40,13 @@ public class Ex06_work {
             for (int j = 0; j < arr.length; j++) {
 
                 if (arr[i] == arr[j]) { //i번 돌리는 중, j번 입력된 숫자들이 같을 때, 카운트한다
-                    cnt++;// 몇번 등장했는지 세는 곳
+                    cnt++;// (도중에 바뀔 수도 있는)몇번 등장했는지 세는 곳
                 } // inner-if
 
             } // inner
 
             if (cnt > count) {
-            count = cnt; 
+            count = cnt; //최종 카운트 수
             max = arr[i];
             } // outer-if
 
