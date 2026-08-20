@@ -28,6 +28,8 @@ public class PersonMain {
 
         }
         
+        //set 지정한다
+        //get 지정한 값에 대한 데이터 저장값
 
 
     }//main

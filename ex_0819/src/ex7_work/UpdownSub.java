@@ -1,27 +1,30 @@
 package ex7_work;
 
-import java.util.Scanner;
+import java.util.Random;
 
 public class UpdownSub {
 
-    Scanner sc = new Scanner(System.in);
-    num = sc.nextInt(); 
-    public String answer(int answer, int num){
-        int cnt = 0;
-        while ( num != answer) {
-            cnt++;
-            System.out.print( "숫자 : " );
-            
-            if(num < answer){
-                return "UP";
-            }else if( num > answer){
-                return "DOWN";
-            }else{
-                return ""+cnt;// + "회 만에 정답";
-            }//if
+    private int random = new Random().nextInt(50) + 1;
+    private int count = 0;
+    private boolean result = true;
+    
+    //정답판별 메서드
+    public boolean check(int n) {
+        count++; //do-while문이 반복될 때마다 count가 늘어난다
 
-            }//while
+            if (n < random) 
+                System.out.println("UP");
+            else if (n > random) {
+                System.out.println("DOWN");
+            } else {
+                System.out.println(count + "회 만에 정답");
+                result = false;
 
-    }//method
+            } // if
+
+            return result ; //boolean으로 받았기에 'false'로 반환
+
+
+    }// method
 
 }
