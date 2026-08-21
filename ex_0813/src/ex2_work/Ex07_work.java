@@ -19,8 +19,8 @@ public class Ex07_work {
         int[][] square = new int[size][size];
         int num = 1; // 마방진에 들어갈 시작수
 
-        int y = 0; // y축 관리(열)
-        int x = 0; // x축 관리(행)
+        int y = 0; // y축 관리(행)
+        int x = 0; // x축 관리(열)
 
         x = size / 2; // 가장 먼저 시작 어떤 수를 넣어도 중앙부터 시작 
 
