@@ -7,27 +7,31 @@ public class Vending {
     private int money;
 
     //자판기에서 관리할 음료수를 준비
-    public void init(){
-        for(int i = 0; i < cans.length; i++){
-            cans[i] = new Can(); //메모리 할당           
-        }//for
-
-        cans[0].setName("환타");
-        cans[0].setPrice(1000);
-
-        cans[1].setName("사이다");
-        cans[1].setPrice(1200);
-
-        cans[2].setName("핫식스");
-        cans[2].setPrice(1300);
-
-        cans[3].setName("콜라");
-        cans[3].setPrice(1400); 
-
-        cans[4].setName("생과일주스");
-        cans[4].setPrice(1500);
-
-    }//init
+    public Vending(){
+        cans[0] = new Can("환타", 1000);
+        cans[1] = new Can("사이다", 1200);
+        cans[2] = new Can("핫식스", 1300);
+        cans[3] = new Can("콜라", 1400);
+        cans[4] = new Can("생과일주스", 1500);
+    } //public Vending(){} == public void init(){} 
+      //코드를 단축시킬 수 있다
+    //----------------------------------
+    // public void init(){
+    //     for(int i = 0; i < cans.length; i++){
+    //         cans[i] = new Can(); //메모리 할당           
+    //     }//for
+    //     cans[0].setName("환타");
+    //     cans[0].setPrice(1000);
+    //     cans[1].setName("사이다");
+    //     cans[1].setPrice(1200);
+    //     cans[2].setName("핫식스");
+    //     cans[2].setPrice(1300);
+    //     cans[3].setName("콜라");
+    //     cans[3].setPrice(1400); 
+    //     cans[4].setName("생과일주스");
+    //     cans[4].setPrice(1500);
+    // }//init
+    
     
     //사용자의 돈을 받는다
     //이 돈으로 먹을 수 있는 음료 목록만 보여주기
