@@ -1,0 +1,90 @@
+<면접보듯이>
+
+1. SQL(Query)문이란?
+	S : Structured 구조화된
+	Q : Query 질의
+	L : Language 언어 
+의 약자로, 데이터베이스의 데이터를 조회, 삽입, 수정, 삭제하거나 
+데이터베이스 객체를 정의하고 권한을 제어하기 위해 사용하는 언어입니다.
+		
+
+2. DML, DCL, DDL에 대해서 설명하시오.
+
+SQL의 명령어로, 데이터 처리 목적에 따라 세가지로 나뉩니다.
+
+1) DML (Data Manipulation Language) : 데이터 조작어 
+	: 테이블 안의 데이터를 조회, 삽입, 수정, 삭제하는 명령어 입니다.
+	대표적인 명령어 예시인 CRUD는 
+	Create - INSERT, Read - SELECT, Update - UPDATE, Delete - DELETE 입니다.
+
+2) DDL (Data Denfinition Language) : 테이터 정의어
+	: 테이블등의 정의, 생성, 변경, 삭제하는 명령어 입니다.
+	대표적인 명령어 예시로 CREATE, ALTER, DROP, RENAME 등이 있습니다.
+
+3) DCL (Data Control Language) : 데이터 제어어 
+	: 데이터베이스에 접근 권한을 부여 혹은 회수하는 명령어 입니다.
+	대표적인 명령어로 GRANT, REVOKE 등이 있습니다.
+
+
+3. OracleDB 자료형의 종류를 서술하세요.
+
+- NEMBER : 숫자데이터를 저장하기 위한 자료형
+- DATE : 날짜와 시간데이터를 저장하기 위한 자료형
+- CHAR : 고정 길이의 문자(문장)데이터를 저장하기 위한 자료형 
+			ex) char(10) => 고정 길이 10바이트로 저장, 
+					    문자열을 5바이트만 사용해도 남은 5바이트는 공백으로 채워져서 10바이트로 저장됨
+- VARCHAR2 : 가변 길이의 문자(문장)데이터를 저장하기 위한 자료형  
+			ex) varchar2(10) => 최대 10바이트까지 저장 가능, 입력된 문자열이 5바이트였다면
+						 실제 데이터는 5바이트 정도의 공간을 사용
+	( 저장할 문자열의 길이에 따라 메모리 낭비 적고 훨씬 많이 쓰임)
+- CLOB(Character Large OBject) : 대용량의 문장을 저장하기 위한 자료형
+
+
+4. LIKE에 대해서 설명하시오.
+사용자가 지정한 문자형태와 일치 또는 포함하고 있는 문자열 또는 데이터를 검색할 때 사용하는 연산자입니다.
+% : 0개 이상의 임의의 문자
+_ : 임의의 문자 1개 
+
+예1) 'a%' : a로 시작하는 모든 문자열
+예2) '%a' : a로 끝나는 모든 문자열
+예3) '%a%' : 값 어디든 a가 포함된 모든 문자열
+예4) 'a____'(언더바4개) : a로 시작하는 값 중에 길이가 5인 문자열
+
+
+5. IN과 BETWEEN의 차이를 설명.
+
+	1) IN : 주어진 목록에서 찾고자 하는 값이 있는 경우, java에서 or와 비슷
+		ex) ..... where job_id IN ( 'a' , 'b' ) => a 또는 b 가 들어간 job_id를 조회
+
+	2) BETWEEN : A와 B사이의 값을 조회하고자 할 때 
+		ex) ..... where salary >= 4000 and salary <= 8000; => 4000이상, 8000이하의 월급
+		    ↑..... where salary between 4000 and 8000; 4000(이상)에서 8000(이하)까지의 월급
+			 ★이 둘은 같은 의미, 하지만 이 경우에는 between이 더 가독성이 좋고 범위를 간결하게 표현합니다.
+		
+6. id, pwd, name, email, phone을 저장하는 회원테이블(member_t)를 만드는 Query를 작성.
+	단, id는 기본키로 지정하도록 하며, pwd와 name은 null값을 허용하지 않도록 한다.
+
+ create table MEMBER_T( 
+	id NUMBER(3) primary key,
+	pwd VARCHAR2(30) not null,
+	name VARCHAR2(50) not null,
+	email VARCHAR2(50),
+	phone VARCHAR2(30)
+);
+	
+
+7. 모든 사원의 사번, 이름, 월급, 연봉을 출력
+
+select employee_id "사번",
+	first_name "이름",
+	salary "월급",
+	salary*12 "연봉"
+from employees;
+
+
+8. 실월급 = 월급 + 월급*보너스 라고 할 때, 실 연봉을 사번, 이름, 실연봉 순으로 조회
+
+select employee_id "사번",
+	first_name "이름",
+	(salary+salary* NVL(commission_pct, 0))*12 "실연봉"
+from employees;

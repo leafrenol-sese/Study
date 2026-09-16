@@ -1,0 +1,63 @@
+1) Select구문 : DB에 저장되어 있는 자원들을 검색할 때 사용
+
+- 계정이 소유하고 있는 테이블 목록 보기
+select * from tabs;
+// 전체 조회는 * 이 들어감
+
+-사원테이블 조회하기
+select * from EMPLOYEES;
+
+-사원테이블에서 사원들의 이름, 성을 조회
+select FIRST_NAME, 
+	LAST_NAME 
+from EMPLOYEES;
+
+-부서테이블의 부서번호, 부서명을 조회
+SELECT department_id, 
+	department_name
+ FROM employees;
+// 오류 : 'department_name' 컬럼이 존재하지 않음
+
+SELECT department_id, 
+	department_name 
+FROM departments;
+// 부서id, 부서이름을 조회, 부서 테이블에서
+
+-사원테이블에서 사번, 이름, 입사일, 월급순으로 조회
+SELECT EMPLOYEE_ID,
+	FIRST_NAME,
+	HIRE_DATE,
+	SALARY
+FROM EMPLOYEES;
+
+-별칭(" ")
+select employee_id,
+	first_name AS myname // =first_name myname
+from employees;
+//first_name을 myname이라는 별칭을 준다
+//한글의 경우 " " 안에 입력해야하며, AS는 생략 가능
+
+--사번, 이름, 직종을 출력하되
+별칭을 한글로 지정해서 조회하기
+SELECT EMPLOYEE_ID "사번",
+	FIRST_NAME "이름",
+	JOB_ID "직종"
+from EMPLOYEES;
+
+-- 사번, 이름, 직종, 급여, 보너스, 보너스의 실제 금액을 조회
+select EMPLOYEE_ID 
+	FIRST_NAME,
+	JOB_ID,
+	SALARY,
+	COMMISSION_PCT,
+	SALARY*COMMISSION_PCT bonus
+from EMPLOYEES;
+
+-- distinct : 중복을 제거하는 명령어
+select distinct JOB_ID
+from employees;
+
+-- 사원중에 관리자(매니저)로써 활동중인 사원이 몇명인지 사번 출력해보기
+select distinct MANAGER_ID
+from EMPLOYEES;
+

@@ -1,0 +1,92 @@
+1) decode() : switch문의 역할을 하는 함수
+
+-- 부서번호 20 -> 마케팅
+		60 -> 전산부
+		90 -> 경영부
+		그외 -> 기타부서
+select department_id,
+	decode( department_id,  
+			20, '마케팅부', 
+			60, '전산부',
+			90, '경영부',
+			'기타부서') dept
+from employees
+order by department_id;
+
+-- 상사번호가 null인 경우, 0으로 변경해서 출력
+select first_name,
+	manager_id,
+decode( manager_id, 
+		null, 0, 
+		manager_id) manager
+from employees;
+
+-- 이름과 직종을 출력하되 직종이 it_prog인 사원들은 '개발자'로 표기,
+	그렇지 않으면 '비개발자' 로 표기
+select first_name,
+	job_id,
+	decode( job_id,
+			'IT_PROG' , '개발자',
+			'비개발자') name
+from employees;
+
+-- 이름과 직종을 출력하되 직종이 IT_PROG -> '개발자,
+	직종이 SA_MAN -> '영업 담당자',
+	그렇지 않은 사원들은 '나머지'라고 출력
+select first_name,
+	job_id,
+	decode( job_id,
+			'IT_PROG', '개발자',
+			'SA_MAN', '영업 담당자',
+			'나머지') job
+from employees
+order by job;
+
+2) case : else if의 역할을 하는 함수
+-- 이름, 부서번호를 출력하되 부서번호 10 -> 마케팅부, 20 -> 전산실, 그외 -> 기타부서 로 조회하시오
+select first_name,
+	department_id,
+	case when department_id = 10 then '마케팅부'
+		when department_id = 20 then '전산실'
+	else '기타부서'
+	end "dept_info"
+from employees;
+→문법적으로 신경쓸게 많다! case는 한번, 쉼표는 사용X, 
+	마무리로 end 후, 이름은 영어한글 관계없이 반드니 쌍따옴표가 필요
+
+-- 이름, 입사일, 월급, 퇴직금을 조회
+	04년도 이전 입사자 -> 월급*100 // 04~06년도 입사자 -> 월급*50 // 07년 이후 입사자 -> 월급*20
+select first_name,
+	hire_date,
+	salary,
+	case 
+		when hire_date < '01/01/2004' then salary*100
+		when hire_date < '01/01/2007' then salary*50
+		else salary*20
+		end "퇴직금"
+from employees;
+
+-- 이름이 6자 이상인 사람에게는 이름 뒤에 !를, 그렇지 않은 사람들에게는 이름 뒤에 @를 붙여서
+	이름, 변환된 이름순으로 출력
+ex) Ellen	Ellen@
+     sunder  sunder!
+select first_name,
+	case
+		when length(first_name) >= first_name 6 then || '!'
+		else first_name || '@'
+		end "new_name"
+from employees;
+
+
+
+
+
+
+
+
+
+
+
+
+
+

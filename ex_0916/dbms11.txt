@@ -1,0 +1,89 @@
+1) group by절
+- 그룹함수와 함계 사용하여 특정 컬럼이나 값을 기준으로 레코드를 묶어 자료를 관리하고자 할 때 사용
+	원래 일반컬럼과 그룹함수는 같이 사용 불가능하나, 컬럼을 그룹화 하면 사용할 수 있다!
+ex) 
+select job_id, count(*) → 이거만 있음 사용 X
+from employees
+group by job_id; → 아래에 얘가 있어야 위가 가능!
+
+-- 매니저별로 관리중인 직원수를 조회
+select manager_id, 
+	count(*) →  manager_id 가 몇번 카운팅(모든 직원대상) 되는지 알고 싶다
+from employees
+group by manager_id; 
+
+-- 각 부서별 급여의 평균과 총액을 조회, 평균은 소수점 한자리까지만 보이도록 반올림
+select department_id, count(*),
+	round( avg(salary) , 1),
+	sum(salary) 
+from employees
+group by department_id; 
+
+-- 직종별 급여의 합과 평균을 조회
+select job_id,
+	sum( salary ) sum, 
+	avg( salary ) avg
+from employees
+group by job_id;
+
+-- 부서번호, 직종별 급여의 합을 출력하되, 부서번호가 낮은 순으로 정렬
+select department_id, 
+	job_id,
+	sum(salary)
+from employees
+group by department_id, job_id 
+order by department_id;
+
+-- 각 부서별로 가장 높은 월급, 가장 낮은 월급 조회
+select department_id,
+	max(salary),
+	min(salary)
+from employees
+group by department_id;
+
+-- 부서별 급여의 합을 출력, 급여의 합이 큰 부서부터 정렬
+select department_id,
+	sum(salary) sal_sum
+from employees
+group by department_id
+order by sal_sum DESC;
+
+-- 부서별, 직종별 인원수 금여의 총 합, 평균 급여를 조회
+	부서번호 낮은것부터, 인원수가 많은 부서순으로 정렬
+select department_id, 
+	job_id, count(*) job_c ,
+	sum(salary),
+	round(avg(salary), 1)
+from employees
+group by department_id, job_id
+order by department_id,  job_c DESC; 
+→ group by는 컬럼 순서를 따지지 않지만, order by는 컬럼의 순서를 따진다(왼쪽 읽기)
+
+--- 숙제 ---
+1) 각 부서별, 직종별 인원수를 출력
+	직종이 man으로 끝나는 직종만 조회
+ex) 
+50	ST_MAN	5
+------
+select department_id, 
+	job_id, 
+	count(*) 
+from employees
+where job_id like '%MAN%'  
+group by department_id, job_id;
+
+
+2) 02~06년 입사자의 수를 연도별로 조회
+ex)
+2002년도	7
+-----
+select to_char(hire_date , 'yyyy') || '년도' "입사년도", 
+	count(*) "인원수"
+from employees
+where hire_date <= '12/31/2006'
+and hire_date >= '01/01/2002'
+group by to_char (hire_date , 'yyyy')
+order by "입사년도" ;
+
+
+

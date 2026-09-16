@@ -1,0 +1,59 @@
+1) set
+1. union
+2. intersect
+3. minus
+
+
+-- 부서번호가 90이거나, 80인 사람들을 부서번호, 급여순으로 오름차순 정렬해서 조회
+select DISTINCT department_id, →DISTINCT : 중복제거
+	salary
+from employees
+where department_id = 90 or department_id = 80
+order by department_id, salary;
+//위아래가 같음!
+-- union(중복제거 + 오름차순 정렬)
+select department_id,
+	salary
+from employees
+where department_id = 90
+UNION
+select department_id,
+	salary
+from employees
+where department_id = 80;
+
+-- 월급 , 부서번호 순으로 조회하되 부서번호가 100번인 사람은 제외
+select salary,
+	department_id
+from employees
+where department_id <100
+UNION
+select salary,
+	department_id
+from employees
+where department_id >100;
+//↑굉장히 비효율적
+
+-- 위의 쿼리를 minus를 통해 줄여보자
+-- minus : 첫번째 select문에서 반환되는 행 중에서
+	     두번째 select문에서 반환되는 행에 존재하지 않는 행들을 반환한다
+select salary,
+	department_id
+from employees
+MINUS
+select salary, 
+	department_id
+from employees
+where department_id = 100;
+//부서번호가 100번인 자원들을 제외한 자원들을 조회
+//결론은 DISTINCT 최고
+
+-- intersect : 두 행의 결과중 공통된 행을 반환한다
+select salary
+from employees
+where department_id > 90
+INTERSECT
+select salary
+from employees
+where department_id <= 80;
+
