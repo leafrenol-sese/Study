@@ -1,0 +1,49 @@
+1) having절
+- 그룹함수에 대한 조건식을 처리하기 위한 키워드
+
+-- 직종별 급여의 최대값을 조회
+select job_id,
+	max(salary)
+from employees
+HAVING max(salary) > 5000 → 그룹함수의 조건절은 where 가 아닌 having을 사용해야한다!
+group by job_id; 
+
+-- 부서별 인원수를 출력하되, 10명 이상인 부서만 조회
+select department_id,
+	count(*) "인원수"
+from employees
+having count(*) >= 10
+group by department_id;
+
+-- 각 부서별 부서번호, 급여의 합, 평균, 인원수를 조회. 급여의 합이 30000이상인 경우만 조회.
+	급여의 평균은 소수점 2자리까지 반올림해서 표기
+select department_id,
+	sum(salary) ,
+	round(avg(salary), 2),
+	count(*) 
+from employees
+having sum(salary) >= 30000
+group by department_id;
+
+
+-- 각 부서별 부서번호, 최대급여, 최소급여, 인원수를 조회. 급여의 최대값이 8000이상인 부서만,
+	부서번호가 존재하는 경우의 결과만 조회. 부서가 작은것부터 정렬
+select department_id,
+	max(salary),
+	min(salary),
+	count(*)
+from employees
+where department_id is not null →일반 컬럼은 되도록 where절에 기입하자!
+group by department_id
+having max(salary) >= 8000
+order by department_id;
+
+-- 각 부서별 평균 월급을 소수점 이하를 자르고 표기
+	평균 급여가 10000미만인 그룹만 조회해야 하며, 부서번호가 50이하인 부서만 조회
+select department_id,
+	trunc( avg (salary) ) 
+from employees
+where department_id <= 50
+group by department_id
+having avg (salary) < 10000;
+
