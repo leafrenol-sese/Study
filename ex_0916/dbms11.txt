@@ -69,7 +69,7 @@ select department_id,
 	job_id, 
 	count(*) 
 from employees
-where job_id like '%MAN%'  
+where job_id like '%MAN'  
 group by department_id, job_id;
 
 
@@ -82,8 +82,23 @@ select to_char(hire_date , 'yyyy') || '년도' "입사년도",
 from employees
 where hire_date <= '12/31/2006'
 and hire_date >= '01/01/2002'
-group by to_char (hire_date , 'yyyy')
+group by to_char(hire_date , 'yyyy')
 order by "입사년도" ;
 
+-- 다른방법
+select substr(hire_date, -4) || '년도' hire_date,
+	count(*) emp_cnt
+from employees
+where substr(hire_date, -4) between '2002' and '2006'
+group by substr(hire_date, -4)
+order by hire_date;
 
+-- 다른방법
+select 
+	sum ( decode(substr(hire_date, -2 ), '02' , 1, 0 ) ) "2002년",
+	sum ( decode(substr(hire_date, -2 ), '03' , 1, 0 ) ) "2003년",
+	sum ( decode(substr(hire_date, -2 ), '04' , 1, 0 ) ) "2004년",
+	sum ( decode(substr(hire_date, -2 ), '05' , 1, 0 ) ) "2005년",
+	sum ( decode(substr(hire_date, -2 ), '06' , 1, 0 ) ) "2006년"
+from employees;
 

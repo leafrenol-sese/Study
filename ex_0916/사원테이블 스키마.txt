@@ -1,4 +1,4 @@
-사원테이블 스키마
+사원테이블 
 EMPLOYEE_ID : 사번
 FIRST_NAME : 이름
 LAST_NAME : 성
@@ -10,3 +10,17 @@ SALARY : 월급
 COMMISSION_PCT : 보너스
 MANAGER_ID : 상사번호
 DEPARTMENT_ID : 부서번호
+
+부서테이블
+DEPARTMENT_ID	: 부서번호
+DEPARTMENT_NAME : 부서이름
+MANAGER_ID : 상사번호
+LOCATION_ID : 지역번호
+
+지역테이블
+LOCATION_ID : 지역
+STREET_ADDRESS : 주소
+POSTAL_CODE : 우편번호
+CITY : 도시이름
+STATE_PROVINCE : 도
+COUNTRY_ID : 국가
