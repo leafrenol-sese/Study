@@ -15,7 +15,7 @@ where first_name = 'Michael'
 and job_id = 'MK_MAN';
 -- 문제 접근2)
 
-- 130000을 초과하는 급여를 받는 사원들의 정보
+- 13000을 초과하는 급여를 받는 사원들의 정보
 select employee_id,
 	first_name,
 	job_id,
@@ -104,7 +104,7 @@ select e.first_name,
 	e.salary,
 	r.region_name
 from employees e
-join departments d on e.department_id = d.department_id
+	join departments d on e.department_id = d.department_id
 	join locations l on d.location_id = l.location_id
 	join countries c on l.country_id = c.country_id
 	join regions r on c.region_id = r. region_id
@@ -117,3 +117,169 @@ where e.salary > (
 	join regions r2 on c2.region_id = r2.region_id
     where r2.region_name = 'Europe'
 );
+
+-- (월급이 가장 적은 사원)의 사번, 이름, 성, 월급을 조회
+select employee_id,
+	first_name,
+	last_name,
+	salary
+from employees
+where salary = (
+	select min(salary)
+from employees
+);
+
+-- 137번 사원보다 월급이 많고(이상), 149번 사원보다 월급이 적은(이하) 사원들의
+	이름과 월급을 조회
+select first_name,
+	salary
+from employees
+where salary between (
+	select salary
+	from employees
+	where employee_id = 137 )
+and  (
+	select salary
+	from employees
+	where employee_id = 149
+);
+
+-- (직종이 sa_rep인 사원들의 [최소급여])보다 적으면서(미만) 직종이 sh_clerk은(여긴 서브쿼리x) 아닌 사원들의
+	이름, 성, 직종, 급여를 조회 
+select first_name,
+	last_name,
+	job_id,
+	salary
+from employees
+where salary < (
+	select min(salary)
+	from employees
+	where job_id = 'SA_REP'
+)and
+job_id != 'SH_CLERK';
+-- not job_id = 'SH_CLERK';
+-- job_id <> 'SH_CLERK';
+-- job_id NOT IN 'SH_CLERK';
+
+-- (100번 부서의 [최소 월급])보다 최소 월급이 많은(초과) 다른모든 부서의 부서번호와 최소급여를 조회
+select department_id,
+	min(salary)
+from employees
+group by department_id
+having min(salary) > (
+	select min(salary)
+	from employees
+	where department_id = 100
+);
+
+-- (성 중에 Bat을 포함하고 있는 사원과 같은 [부서])에서 근무하는 사원들의 모든 정보를 출력
+select *
+from employees
+where department_id = (
+	select department_id
+	from employees
+	where last_name like '%Bat%'
+);
+
+-- (158번 사원과 같은 [직종])에서 근무하는 사원들 중, 
+	([급여]가 164번 사원)보다 많은(초과) 사원들의 사번, 이름, 성, 직종, 급여를 조회
+select employee_id,
+	first_name,
+	job_id,
+	salary
+from employees
+where job_id = (
+	select job_id
+	from employees
+	where employee_id = 158)
+and salary > (
+	select salary
+	from employees
+	where employee_id = 164)
+;
+
+-- (Matthew를 상사로) 두고 있으면서 (직종이 st_clerk)인 사원들의 
+	사번, 이름, 직종, 상사번호를 출력
+select employee_id,
+	first_name,
+	job_id,
+	manager_id
+from employees
+where manager_id = (
+	select employee_id
+	from employees
+	where first_name = 'Matthew'
+)
+and job_id = 'ST_CLERK';
+
+-- (경력이 가장 오래된) 사원의 사번, 이름, 급여, 입사일, 부서명을 조회
+select e.employee_id,
+	e.first_name,
+	e.salary,
+	e.hire_date,
+	d.department_name
+from employees e
+join departments d on e.department_id = d.department_id
+where e.hire_date = (
+	select min(hire_date)
+	from employees
+);
+
+-- (근무도시가 Seattle인 사람들의 평균 [급여])보다 많이 받는(초과) 사원들의 사번, 이름, 급여를 조회하시오
+select employee_id,
+	first_name,
+	salary
+from employees
+where salary > (
+	select avg(e.salary)
+	from employees e 
+	join departments d on e.department_id = d.department_id
+	join locations l on  d.location_id = l.location_id
+	where l.city = 'Seattle'
+);
+
+-- (시애틀 근무자들의 [평균급여])보다 많이 받는(초과) 사람들을 (시애틀 근무자)들 중에서만 추려서 
+	사번, 이름, 급여, 도시 순으로 출력
+select e.employee_id,
+	e.first_name,
+	e.salary,
+	l.city
+from employees e
+join departments d on e.department_id = d.department_id
+join locations l on  d.location_id = l.location_id
+where l.city = 'Seattle' → 시에틀 근무자들의 사번, 이름, 급여, 도시 조회
+and e.salary > ( → 사원 월급 > '시에틀 근무자들의 평균 월급 인 시에틀의 사원들만 출력'
+	select avg(e2.salary)
+	from employees e2
+	join departments d2 on e2.department_id = d2.department_id
+	join locations l2 on  d2.location_id = l2.location_id
+	where l2.city = 'Seattle' → 시에틀 근무자들의 평균 월급 조회
+);
+
+-- (각 부서별 최고 월급을 받는) 사원의 부서번호, 이름, 급여를 부서번호 오름차순으로 정렬
+select e.department_id,
+	e.first_name,
+	e.salary
+from employees e, ( 
+	select department_id,
+		max(salary) mx 
+	from employees
+	group by department_id
+	) max_sal
+where e.salary = max_sal.mx → max_sal:서브쿼리 이름  mx:최대 월급, mx라는 변수명 재활용
+order by e.department_id;
+
+-- 사원테이블 한페이지에 10명씩 조회되도록 페이징처리
+select *
+from(
+	select RANK() OVER(order by employee_id) no, e.* → no:넘버링 , e*: employees 테이블 전체
+	from employees e
+)
+where no between 1 and 10; → 연달아서 11~20 기입이 안된다....
+
+
+
+
+
+
+

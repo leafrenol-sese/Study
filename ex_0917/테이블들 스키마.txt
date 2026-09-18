@@ -1,4 +1,4 @@
-사원테이블 (employees)
+사원 (employees)
 EMPLOYEE_ID : 사번
 FIRST_NAME : 이름
 LAST_NAME : 성
@@ -11,31 +11,31 @@ COMMISSION_PCT : 보너스
 MANAGER_ID : 상사번호
 DEPARTMENT_ID : 부서번호
 
-직종테이블 (jobs)
+직종 (jobs)
 JOB_ID : 직종
 JOB_TITLE : 직종명
 MIN_SALARY : 최소 월급
 MAX_SALARY : 최대 월급
 
-부서테이블 (departments)
+부서 (departments)
 DEPARTMENT_ID: 부서번호 
 DEPARTMENT_NAME : 부서이름
 MANAGER_ID : 상사번호
 LOCATION_ID : 지역
 
-지역테이블 (locations)
+지역 (locations)
 LOCATION_ID : 지역번호
 STREET_ADDRESS : 주소
 POSTAL_CODE : 우편번호
 CITY : 도시이름
-STATE_PROVINCE : 도
+STATE_PROVINCE : 주
 COUNTRY_ID : 국가
 
-국가테이블 (countries)
+국가 (countries)
 COUNTRY_ID : 국가
 COUNTRY_NAME : 국가이름
 REGION_ID	 : 대륙번호
 
-대륙테이블(regions)
+대륙 (regions)
 REGION_ID : 대륙번호
 REGION_NAME : 대륙이름

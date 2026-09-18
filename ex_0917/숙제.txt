@@ -1,0 +1,71 @@
+-- 사원번호가 126인 사람의 이름, 입사일자, 부서번호 출력
+select first_name,
+	hire_date,
+	department_id
+from employees
+where employee_id = 126;
+
+-- 부서번호가 10번인 직원의 부서번호, 사번, 이름, 급여를 출력하라
+select department_id,
+	employee_id,
+	first_name,
+	salary
+from employees
+where department_id = 10
+
+--사원의 평균임금보다 많은(초과) 사원의 사원번호, 이름, 부서명, 입사일, 급여를
+	급여오름차순으로출력하라. 
+select e.employee_id,
+	e.first_name,
+	d.department_name,
+	e.hire_date,
+	e.salary
+from employees e
+join departments d on e.department_id = d.department_id
+where e.salary > (
+	select avg(e.salary)
+	from employees e)
+order by salary ;
+
+-- (30번 부서의 [평균급여])보다 많이 받는(초과) 직원들중에서 
+	(가장적은 급여를 받는) 직원들의 이름과 급여를 출력하시오
+select first_name,
+	salary
+from employees
+where salary = (
+	select min(salary)
+	from employees
+	where salary > (
+		select avg(salary)
+		from employees
+		where department_id = 30
+)
+);
+
+-- EMPLOYEES 테이블에서 급여를 많이 받는 순서대로 조회했을 때 
+	(6번째부터 10번째까지) 5명의 last_name, first_name, salary를 조회하는 sql문장을 작성하시오.
+select *
+from (
+    select rank() over(order by salary desc) ranking,
+           last_name,
+           first_name,
+           salary
+    from employees
+)
+where ranking between 6 and 10
+order by ranking;
+
+<이 문제는 다시보기>
+-- 각 업무(job) 별로 급여(salary)의 총합을 구하고자 한다. 
+	연봉총합이 가장 높은 업무부터 업무명(job_title)과 급여총합을 조회하시오.
+	단, (급여총합이 30,000보다 큰(초과) 업무)만 출력하시오. 
+select j.job_title,
+       sum(e.salary) * 12 as sum
+from employees e
+join jobs j on e.job_id = j.job_id
+group by j.job_title
+having sum(e.salary) * 12 > 30000
+order by sum(e.salary) * 12 DESC ;
+
+
+
